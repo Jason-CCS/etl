@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration monitorInterval="5" status="info">
+
+    <appenders>
+
+        <RollingFile name="TestReLoad" fileName="logs/etl.log" filePattern="logs/etl-%i.log">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="2KB"/>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <RollingFile name="TestReLoad2" fileName="logs/TestReLoad2.log" filePattern="logs/TestReLoad2-%i.log">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="2MB"/>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+
+        <RollingFile name="Exmple" fileName="logs/exmple.log" filePattern="logs/exmple-%i.log">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="10MB"/>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+
+        <Console name="ConsolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <!--  <SMTP name="Mail" subject="CustomerProfile_SyncApp Error Log" to="Ichang.I.Lin@newegg.com"
+          smtpHost="st01smtp01.buyabs.corp"  bufferSize="50"></SMTP> -->
+    </appenders>
+
+    <loggers>
+
+        <logger name="testReLoad" additivity="true" level="INFO">
+            <appender-ref ref="TestReLoad"/>
+        </logger>
+
+        <logger name="ec.newegg.*.test" additivity="false">
+            <appender-ref ref="Exmple"/>
+        </logger>
+
+        <root level="DEBUG">
+            <appender-ref ref="ConsolePrint"/>
+            <appender-ref ref="ConsolePrint"/>
+        </root>
+    </loggers>
+</configuration>
