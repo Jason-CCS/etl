@@ -1,7 +1,7 @@
-package com.jason.app.demo;
+package com.jason.demo;
 
-import com.jason.app.phase.AbstractPhase;
-import com.jason.app.phase.Status;
+import com.jason.phase.AbstractPhase;
+import com.jason.phase.Status;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

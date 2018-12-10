@@ -1,6 +1,6 @@
-package com.jason.app;
+package com.jason;
 
-import com.jason.app.phase.AbstractPhase;
+import com.jason.phase.AbstractPhase;
 
 import java.util.List;
 import java.util.Map;

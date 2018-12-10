@@ -1,4 +1,4 @@
-package com.jason.app;
+package com.jason;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,6 +1,6 @@
-package com.jason.app.phase;
+package com.jason.phase;
 
-import com.jason.app.ETLContext;
+import com.jason.ETLContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
