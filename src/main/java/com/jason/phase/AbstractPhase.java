@@ -25,24 +25,24 @@ public abstract class AbstractPhase implements Callable<AbstractPhase> {
         this.phaseName = phaseName;
     }
 
-    public AbstractPhase call(){
+    public AbstractPhase call() {
         this.init();
         this.setStatus(Status.INIT_START);
         this.phaser.arriveAndAwaitAdvance();
         // phase: 從0開始, parties: 註冊數, arrived: 到達數; 一旦註冊數==到達數，phase就會加一，arrived歸零
-        log.debug("phase: " + this.phaser.getPhase() + ", parties: " +
+        log.debug(this.getPhaseName() + " phase: " + this.phaser.getPhase() + ", parties: " +
                 this.phaser.getRegisteredParties() + ", arrived: " + this.phaser.getArrivedParties());
 
         this.mainwork();
         this.setStatus(Status.MAIN_WORK_START);
         this.phaser.arriveAndAwaitAdvance();
-        log.debug("phase: " + this.phaser.getPhase() + ", parties: " +
+        log.debug(this.getPhaseName() + " phase: " + this.phaser.getPhase() + ", parties: " +
                 this.phaser.getRegisteredParties() + ", arrived: " + this.phaser.getArrivedParties());
 
         this.finish();
         this.setStatus(Status.FINISHING);
         this.phaser.arriveAndDeregister();
-        log.debug(this.getPhaseName()+" phase: " + this.phaser.getPhase() + ", parties: " +
+        log.debug(this.getPhaseName() + " phase: " + this.phaser.getPhase() + ", parties: " +
                 this.phaser.getRegisteredParties() + ", arrived: " + this.phaser.getArrivedParties());
         this.setStatus(Status.AFTER_FINISH);
         return this;

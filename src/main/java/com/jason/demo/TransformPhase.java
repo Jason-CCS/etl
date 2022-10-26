@@ -45,18 +45,22 @@ public class TransformPhase extends AbstractPhase {
             try {
                 if (!bq.isEmpty()) {
                     String voteStr = (String) bq.take();
+                    log.debug("拿出一張票。");
                     String[] voteAry = voteStr.split(" ");
                     String area = voteAry[0];
                     String who = voteAry[1];
 
                     switch (who) {
                         case "A":
+                            log.debug("此張票的被選人是A，放進投票箱A");
                             aQueue.put(area);
                             break;
                         case "B":
+                            log.debug("此張票的被選人是B，放進投票箱B");
                             bQueue.put(area);
                             break;
                         default:
+                            log.debug("此張票的被選人是C，放進投票箱C");
                             cQueue.put(area);
                     }
                 }

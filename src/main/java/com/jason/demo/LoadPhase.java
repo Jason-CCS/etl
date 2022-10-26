@@ -47,32 +47,32 @@ public class LoadPhase extends AbstractPhase {
          * Future below is actually a String combined with "amount of votes in one queue/amount of votes by TP/
          * amount of votes by TC/amount of votes by KS
          */
-        Future fa = es.submit(new voteCounter("count for A", this, aQ));
-        Future fb = es.submit(new voteCounter("count for B", this, bQ));
-        Future fc = es.submit(new voteCounter("count for C", this, cQ));
+        Future fa = es.submit(new voteCounter("候選人A票箱", this, aQ));
+        Future fb = es.submit(new voteCounter("候選人B票箱", this, bQ));
+        Future fc = es.submit(new voteCounter("候選人C票箱", this, cQ));
 
         try {
             String resultVoteForA = (String) fa.get();
             String[] strAryA = resultVoteForA.split("/");
-            log.info("Amount for candidate A is {}", strAryA[0]);
+            log.info("候選人A得到的票數是{}", strAryA[0]);
             String resultVoteForB = (String) fb.get();
             String[] strAryB = resultVoteForB.split("/");
-            log.info("Amount for candidate B is {}", strAryB[0]);
+            log.info("候選人B得到的票數是{}", strAryB[0]);
             String resultVoteForC = (String) fc.get();
             String[] strAryC = resultVoteForC.split("/");
-            log.info("Amount for candidate C is {}", strAryC[0]);
+            log.info("候選人C得到的票數是{}", strAryC[0]);
 
-            log.info("Statistics for candidate A is: TP area is {}%, TC area is {}%, KS area is {}%.",
+            log.info("候選人A：台北地區佔{}%, 台中地區佔{}%, 高雄地區佔{}%.",
                     Double.parseDouble(strAryA[1]) / Double.parseDouble(strAryA[0]) * 100,
                     Double.parseDouble(strAryA[2]) / Double.parseDouble(strAryA[0]) * 100,
                     Double.parseDouble(strAryA[3]) / Double.parseDouble(strAryA[0]) * 100);
 
-            log.info("Statistics for candidate B is: TP area is {}%, TC area is {}%, KS area is {}%.",
+            log.info("候選人B：台北地區佔{}%, 台中地區佔{}%, 高雄地區佔{}%.",
                     Double.parseDouble(strAryB[1]) / Double.parseDouble(strAryB[0]) * 100,
                     Double.parseDouble(strAryB[2]) / Double.parseDouble(strAryB[0]) * 100,
                     Double.parseDouble(strAryB[3]) / Double.parseDouble(strAryB[0]) * 100);
 
-            log.info("Statistics for candidate C is: TP area is {}%, TC area is {}%, KS area is {}%.",
+            log.info("候選人Ｃ：台北地區佔{}%, 台中地區佔{}%, 高雄地區佔{}%.",
                     Double.parseDouble(strAryC[1]) / Double.parseDouble(strAryC[0]) * 100,
                     Double.parseDouble(strAryC[2]) / Double.parseDouble(strAryC[0]) * 100,
                     Double.parseDouble(strAryC[3]) / Double.parseDouble(strAryC[0]) * 100);
@@ -80,13 +80,13 @@ public class LoadPhase extends AbstractPhase {
             Double resultForTP = Double.parseDouble(strAryA[1]) + Double.parseDouble(strAryB[1]) + Double.parseDouble(strAryC[1]);
             Double resultForTC = Double.parseDouble(strAryA[2]) + Double.parseDouble(strAryB[2]) + Double.parseDouble(strAryC[2]);
             Double resultForKS = Double.parseDouble(strAryA[3]) + Double.parseDouble(strAryB[3]) + Double.parseDouble(strAryC[3]);
-            log.info("Statistics for area TP is: A accounts for {}%, B accounts for {}%, C accounts for {}%.",
+            log.info("台北地區：候選人A佔{}%, 候選人B佔{}%, 候選人C佔{}%.",
                     Double.parseDouble(strAryA[1]) / resultForTP * 100, Double.parseDouble(strAryB[1]) / resultForTP * 100,
                     Double.parseDouble(strAryC[1]) / resultForTP * 100);
-            log.info("Statistics for area TC is: A accounts for {}%, B accounts for {}%, C accounts for {}%.",
+            log.info("台中地區：候選人A佔{}%, 候選人B佔{}%, 候選人C佔{}%.",
                     Double.parseDouble(strAryA[2]) / resultForTC * 100, Double.parseDouble(strAryB[2]) / resultForTC * 100,
                     Double.parseDouble(strAryC[2]) / resultForTC * 100);
-            log.info("Statistics for area KS is: A accounts for {}%, B accounts for {}%, C accounts for {}%.",
+            log.info("高雄地區：候選人A佔{}%, 候選人B佔{}%, 候選人C佔{}%.",
                     Double.parseDouble(strAryA[3]) / resultForKS * 100, Double.parseDouble(strAryB[3]) / resultForKS * 100,
                     Double.parseDouble(strAryC[3]) / resultForKS * 100);
 
@@ -117,7 +117,7 @@ public class LoadPhase extends AbstractPhase {
                 do {
                     if (!q.isEmpty()) {
                         String area = (String) q.take();
-                        log.debug(this.getTaskName() + ", area is " + area);
+                        log.debug(this.getTaskName() + "，投票地區來自" + area);
                         amount++;
                         switch (area) {
                             case "TP":

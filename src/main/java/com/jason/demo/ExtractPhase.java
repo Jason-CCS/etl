@@ -113,13 +113,13 @@ public class ExtractPhase extends AbstractPhase {
         @Override
         public Object doCall() {
             try {
-                TimeUnit.MILLISECONDS.sleep(rand.nextInt(5000));
+                TimeUnit.SECONDS.sleep(rand.nextInt(10));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             String votedArea = area[rand.nextInt(area.length)];
             String voted = candidates[rand.nextInt(candidates.length)];
-            log.debug(votedArea.concat(" ").concat(voted));
+            log.debug("發生投票：投票地區是" + votedArea + "，候選人是" + voted);
 
             return votedArea.concat(" ").concat(voted);
         }
